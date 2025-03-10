@@ -6,7 +6,7 @@ export default function Home({ src }) {
     <>
       {
         src.map(post => (
-          <React.Fragment >
+          <>
             <Link to={post.thumbnailUrl}>
               <div
                 className="container mx-auto border border-gray-300 my-12 p-4"
@@ -52,7 +52,7 @@ export default function Home({ src }) {
 
             </Link>
 
-          </React.Fragment>
+          </>
 
         ))
       }
