@@ -1,4 +1,6 @@
 import { Header } from './component/Header';
+import posts from './data/posts';
+import  Home from './pages/Home'
 
 
 function App() {
@@ -6,6 +8,7 @@ function App() {
     <div className="App">
         <div className="App">
           <Header />
+          <Home src={(posts)} />
         </div>
     </div>
   );
