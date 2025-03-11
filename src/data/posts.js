@@ -1,6 +1,6 @@
 export const posts = [
   {
-    id: 1,
+    id: 4,
     title: '記事タイトル１',
     thumbnailUrl: 'https://placehold.jp/800x400.png',
     createdAt: '2023-09-11T09:00:00.000Z',

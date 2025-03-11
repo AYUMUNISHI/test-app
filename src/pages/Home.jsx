@@ -6,8 +6,8 @@ export default function Home({ src }) {
     <>
       {
         src.map(post => (
-          <>
-            <Link to={post.thumbnailUrl}>
+          <div key={post.id}>
+            <Link to={`/posts/${post.id}`}>
               <div
                 className="container mx-auto border border-gray-300 my-12 p-4"
               >
@@ -52,7 +52,7 @@ export default function Home({ src }) {
 
             </Link>
 
-          </>
+          </div>
 
         ))
       }
