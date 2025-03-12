@@ -4,16 +4,27 @@ import { API_BASE_URL } from "../constants";
 
 export const Home = () => {
 
-  const [posts, setPosts] = useState([])
+  const [posts, setPosts] = useState(null)
+  const [loading, setLoading] =useState(false)
 
   useEffect(() =>{
     const fetcher = async () =>{
+      setLoading(true)
       const ser =  await fetch(`${API_BASE_URL}/posts`)
       const { posts } = await ser.json()
       setPosts(posts)
+      setLoading(false)
     }
     fetcher()
   }, [])
+
+  if(loading){
+    return<div>読み込み中...</div>
+  }
+
+  if(!loading && !posts){
+    return<div>記事がありません</div>
+  }
 
   return (
     <>
