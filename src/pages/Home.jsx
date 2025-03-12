@@ -1,11 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { API_BASE_URL } from "../constants";
 
-export default function Home({ src }) {
+export const Home = () => {
+
+  const [posts, setPosts] = useState([])
+
+  useEffect(() =>{
+    const fetcher = async () =>{
+      const ser =  await fetch(`${API_BASE_URL}/posts`)
+      const { posts } = await ser.json()
+      setPosts(posts)
+    }
+    fetcher()
+  }, [])
+
   return (
     <>
       {
-        src.map(post => (
+        posts.map(post => (
           <div key={post.id}>
             <Link to={`/posts/${post.id}`}>
               <div

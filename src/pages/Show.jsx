@@ -1,15 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import posts from '../data/posts';
+import { API_BASE_URL } from '../constants';
 
 
 export const Show = () => {
-  const { id } = useParams();
-  const post = posts.find((p) => p.id === Number(id));
-  
-  if(!post){
-    return <h2>記事が見つかりません</h2>
+  const { id } = useParams()
+  const [post, setPosts] = useState(null)
+  const [loading, setLoading]= useState(false)
 
+  useEffect(() =>{
+    const fetcher = async () => {
+      setLoading(true)
+      const ser =  await fetch(`${API_BASE_URL}/posts/${id}`)
+      const { post } = await ser.json()
+      setPosts(post)
+      setLoading(false)
+    }
+    fetcher()
+  },[id])
+
+  if(loading){
+    return <div>読み込み中...</div>
+  }
+  
+  if(!loading && !post){
+    return <div>記事がありません</div>
   }
 
   return (
