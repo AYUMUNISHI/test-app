@@ -1,11 +1,13 @@
 import { Header } from './component/Header';
 import posts from './data/posts';
-import Home from './pages/Home';
+import { Home } from './pages/Home';
 import { Show } from './pages/Show';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 
 function App() {
+
+
   return (
     <BrowserRouter>
 

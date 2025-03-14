@@ -1,11 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { API_BASE_URL } from "../constants";
 
-export default function Home({ src }) {
+export const Home = () => {
+
+  const [posts, setPosts] = useState(null)
+  const [loading, setLoading] =useState(false)
+
+  useEffect(() =>{
+    const fetcher = async () =>{
+      setLoading(true)
+      const ser =  await fetch(`${API_BASE_URL}/posts`)
+      const { posts } = await ser.json()
+      setPosts(posts)
+      setLoading(false)
+    }
+    fetcher()
+  }, [])
+
+  if(loading){
+    return<div>読み込み中...</div>
+  }
+
+  if(!loading && !posts){
+    return<div>記事がありません</div>
+  }
+
   return (
     <>
       {
-        src.map(post => (
+        posts.map(post => (
           <div key={post.id}>
             <Link to={`/posts/${post.id}`}>
               <div
