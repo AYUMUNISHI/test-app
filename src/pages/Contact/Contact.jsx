@@ -36,11 +36,23 @@ export const Contact = () => {
     // エラーがなければ送信する
     if (Object.keys(errors).length === 0) {
 
-      await fetch(`${API_BASE_URL}/contacts`, options)
+      try{
+        const response = await fetch(`${API_BASE_URL}/contacts`, options);
 
+        if(!response.ok){
+          throw new Error("送信に失敗しました。")
+        };
 
-      alert("送信が完了しました。");
-      resetForm();
+        const data = await response.json();
+        alert("送信が完了しました。");
+        resetForm();
+        return(data);
+
+      }catch(e){
+        alert(e.message || "エラーが発生しました。")
+        return e;
+      }
+
     }
   };
   const validate = (values) => {
